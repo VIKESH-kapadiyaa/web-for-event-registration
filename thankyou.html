@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You for Registering!</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            overflow: hidden;
+        }
+
+        /* Backgrounds */
+        #gradient-canvas, #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        #particle-canvas { z-index: 0; }
+        #gradient-canvas {
+            --gradient-color-1: #222222;
+            --gradient-color-2: #0a0a0a;
+            --gradient-color-3: #1a1a1a;
+            --gradient-color-4: #000000;
+        }
+        .main-content-wrapper {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        
+        /* Glass Card Effect */
+        .glass-card {
+            background: rgba(26, 26, 26, 0.3);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(64, 64, 64, 0.4);
+            border-radius: 1.5rem;
+        }
+
+        /* Animated Checkmark */
+        .animated-checkmark {
+            width: 70px; height: 70px; border-radius: 50%;
+            display: block; stroke-width: 3; stroke: #ffffff;
+            stroke-miterlimit: 10; margin: 0 auto;
+            box-shadow: inset 0px 0px 0px #ffffff;
+            animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+        }
+        .animated-checkmark__circle {
+            stroke-dasharray: 166; stroke-dashoffset: 166;
+            stroke-width: 3; stroke-miterlimit: 10; stroke: #ffffff;
+            fill: none; animation: stroke .6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+        }
+        .animated-checkmark__check {
+            transform-origin: 50% 50%; stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            animation: stroke .3s cubic-bezier(0.65, 0, 0.45, 1) .8s forwards;
+        }
+        @keyframes stroke { 100% { stroke-dashoffset: 0; } }
+        @keyframes scale { 0%, 100% { transform: none; } 50% { transform: scale3d(1.1, 1.1, 1); } }
+        @keyframes fill { 100% { box-shadow: inset 0px 0px 0px 40px #222; } }
+
+        /* Confetti Animation */
+        .confetti {
+            position: absolute;
+            width: 8px;
+            height: 16px;
+            background-color: #fff;
+            top: -20px;
+            opacity: 0;
+            animation: confetti-fall 4s linear forwards;
+        }
+        .confetti:nth-child(odd) { height: 8px; width: 8px; }
+        @keyframes confetti-fall {
+            0% { transform: translateY(0) rotateZ(0deg) rotateY(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotateZ(720deg) rotateY(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body class="antialiased">
+    
+    <canvas id="gradient-canvas"></canvas>
+    <canvas id="particle-canvas"></canvas>
+    <div id="confetti-container" class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none"></div>
+
+    <div class="main-content-wrapper container mx-auto px-4 py-12">
+        <div class="glass-card text-center p-8 md:p-12 max-w-lg mx-auto">
+            <div class="mb-6">
+                <svg class="animated-checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                    <circle class="animated-checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+                    <path class="animated-checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                </svg>
+            </div>
+            <h1 class="text-3xl md:text-4xl font-bold text-white">Thank You For Registering!</h1>
+            <p class="text-neutral-300 mt-4">We've saved your spot and can't wait to see you at the workshop. An invitation with more details will be sent to your email shortly.</p>
+            <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=From+Prompt+to+Publish:+AI+Web+Dev+Workshop&dates=20250924T043000Z/20250924T114500Z&details=A+hands-on+workshop+to+build+a+complete+website+with+AI.+Don't+forget+your+laptop!&location=Main+audi,+IILM+University" target="_blank" rel="noopener noreferrer" class="inline-block bg-white text-black font-bold py-2.5 px-6 rounded-lg hover:bg-opacity-80 transition-colors duration-300">
+                    Add to Google Calendar
+                </a>
+                 <a href="index.html" class="inline-block bg-transparent border-2 border-white text-white font-bold py-2.5 px-6 rounded-lg hover:bg-white hover:text-black transition-colors duration-300">
+                    Back to Event Page
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Re-using the background animation scripts from the main page for consistency.
+            class GradientAnimation {
+                constructor() {
+                    this.cnv = document.querySelector(`#gradient-canvas`); this.ctx = this.cnv.getContext(`2d`);
+                    this.circles = []; this.setCanvasSize(); this.init();
+                    window.addEventListener(`resize`, () => this.setCanvasSize());
+                }
+                init() {
+                    const computedStyle = getComputedStyle(this.cnv);
+                    const colors = [
+                        computedStyle.getPropertyValue('--gradient-color-1').trim(), computedStyle.getPropertyValue('--gradient-color-2').trim(),
+                        computedStyle.getPropertyValue('--gradient-color-3').trim(), computedStyle.getPropertyValue('--gradient-color-4').trim()
+                    ];
+                    for (let i = 0; i < 4; i++) { this.circles.push({ x: Math.random() * this.w, y: Math.random() * this.h, r: Math.random() * Math.min(this.w, this.h) * 0.5 + Math.min(this.w, this.h) * 0.2, vx: (Math.random() - 0.5) * 0.3, vy: (Math.random() - 0.5) * 0.3, color: colors[i] }); }
+                    this.animate();
+                }
+                setCanvasSize() { this.w = this.cnv.width = window.innerWidth; this.h = this.cnv.height = window.innerHeight; }
+                animate() {
+                    this.ctx.clearRect(0, 0, this.w, this.h);
+                    this.circles.forEach(circle => this.update(circle));
+                    requestAnimationFrame(() => this.animate());
+                }
+                update(circle) {
+                    if (circle.x < 0 || circle.x > this.w) circle.vx *= -1;
+                    if (circle.y < 0 || circle.y > this.h) circle.vy *= -1;
+                    circle.x += circle.vx; circle.y += circle.vy;
+                    this.draw(circle);
+                }
+                draw(circle) {
+                    let grd = this.ctx.createRadialGradient(circle.x, circle.y, 0, circle.x, circle.y, circle.r);
+                    grd.addColorStop(0, circle.color); grd.addColorStop(1, `${circle.color}00`);
+                    this.ctx.fillStyle = grd; this.ctx.beginPath();
+                    this.ctx.arc(circle.x, circle.y, circle.r, 0, Math.PI * 2); this.ctx.fill();
+                }
+            }
+            new GradientAnimation();
+
+            const particleCanvas = document.getElementById('particle-canvas');
+            const pCtx = particleCanvas.getContext('2d');
+            let particlesArray;
+            function initParticles() {
+                particleCanvas.width = window.innerWidth; particleCanvas.height = window.innerHeight;
+                particlesArray = [];
+                let numberOfParticles = (particleCanvas.height * particleCanvas.width) / 9000;
+                for (let i = 0; i < numberOfParticles; i++) {
+                    let size = (Math.random() * 2) + 1;
+                    let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
+                    let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
+                    let directionX = (Math.random() * .2) - .1;
+                    let directionY = (Math.random() * .2) - .1;
+                    particlesArray.push(new Particle(x, y, directionX, directionY, size));
+                }
+            }
+            class Particle {
+                constructor(x, y, directionX, directionY, size) { this.x = x; this.y = y; this.directionX = directionX; this.directionY = directionY; this.size = size; }
+                draw() { pCtx.beginPath(); pCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false); pCtx.fillStyle = 'rgba(100,100,100,0.5)'; pCtx.fill(); }
+                update() {
+                    if (this.x > pCtx.canvas.width || this.x < 0) { this.directionX = -this.directionX; }
+                    if (this.y > pCtx.canvas.height || this.y < 0) { this.directionY = -this.directionY; }
+                    this.x += this.directionX; this.y += this.directionY;
+                    this.draw();
+                }
+            }
+            function connectParticles() {
+                let opacityValue = 1;
+                for (let a = 0; a < particlesArray.length; a++) {
+                    for (let b = a; b < particlesArray.length; b++) {
+                        let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+                        if (distance < (particleCanvas.width / 7) * (particleCanvas.height / 7)) {
+                            opacityValue = 1 - (distance / 20000);
+                            pCtx.strokeStyle = 'rgba(140,140,140,' + opacityValue + ')';
+                            pCtx.lineWidth = 1; pCtx.beginPath();
+                            pCtx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                            pCtx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                            pCtx.stroke();
+                        }
+                    }
+                }
+            }
+            function animateParticles() {
+                requestAnimationFrame(animateParticles); pCtx.clearRect(0, 0, innerWidth, innerHeight);
+                particlesArray.forEach(p => p.update());
+                connectParticles();
+            }
+            window.addEventListener('resize', () => { initParticles(); });
+            initParticles(); animateParticles();
+
+            function triggerConfetti() {
+                const container = document.getElementById('confetti-container');
+                if (!container) return;
+                for (let i = 0; i < 100; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.classList.add('confetti');
+                    confetti.style.left = `${Math.random() * 100}%`;
+                    confetti.style.animationDelay = `${Math.random() * 2}s`;
+                    confetti.style.animationDuration = `${Math.random() * 3 + 3}s`;
+                    confetti.style.backgroundColor = `hsl(0, 0%, ${Math.random() * 20 + 80}%)`;
+                    container.appendChild(confetti);
+                    confetti.addEventListener('animationend', () => confetti.remove());
+                }
+            }
+            triggerConfetti();
+        });
+    </script>
+</body>
+</html>
+
