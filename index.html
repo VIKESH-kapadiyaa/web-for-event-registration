@@ -13,6 +13,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
     
+    <!-- Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
     <style>
         /* Custom styles for a true black and white look */
         body {
@@ -143,12 +146,12 @@
             display: inline-block;
             opacity: 0;
             animation: reveal-letter 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000) forwards,
-                       letter-wave 2.2s ease-in-out infinite;
+                         letter-wave 2.2s ease-in-out infinite;
         }
         @keyframes reveal-letter { to { opacity: 1; } }
         @keyframes letter-wave {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-6px); }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
         }
 
         /* 5. SVG Icon Drawing Animation */
@@ -240,15 +243,16 @@
                     <div class="glass-card interactive-card p-6 reveal">
                         <h3 class="text-xl font-bold mb-4">Event Details</h3>
                         <ul class="space-y-4 text-neutral-200">
-                            <li class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24" 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-neutral-300"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> <span>Date: [24th September]</span></li>
-                            <li class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24" 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-neutral-300"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> <span>Time: [10AM - 5:15PM]</span></li>
-                            <li class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24" 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-neutral-300"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> <span>Venue: [Main audi, IILM University]</span></li>
+                            <li class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-neutral-300"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> <span>Date: [24th September]</span></li>
+                            <li class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-neutral-300"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> <span>Time: [10AM - 5:15PM]</span></li>
+                            <li class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-neutral-300"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> <span>Venue: [Main audi, IILM University]</span></li>
                         </ul>
                         <div class="mt-6 border-t border-neutral-700 pt-4 text-sm text-neutral-400">
                             <strong>Prerequisites:</strong> None! Just bring your laptop and your curiosity.
                         </div>
                     </div>
                 </div>
+                
                 <div id="register-form" class="lg:col-span-2 glass-card p-6 sm:p-8 md:p-12 reveal">
                     <div id="form-container">
                         <h2 class="text-3xl font-bold mb-2">Register Now</h2>
@@ -273,22 +277,20 @@
                                         <input type="text" id="yearBranch" name="yearBranch" required class="form-input" placeholder=" ">
                                         <label for="yearBranch" class="form-label">Year & Branch</label>
                                     </div>
-                                     </div>
+                                    </div>
                                     
                                     <div class="form-input-container">
                                         <input type="text" id="Phone number" name="Phone number" required class="form-input" placeholder=" ">
                                         <label for="Phone number" class="form-label">Phone number</label>
                                     </div>
-                                        </div>
+                                    </div>
                                 <div class="form-input-container">
                                      <textarea id="excitedToLearn" name="excitedToLearn" rows="3" class="form-input" placeholder=" "></textarea>
                                      <label for="excitedToLearn" class="form-label">What are you most excited to learn? (Optional)</label>
                                 </div>
                                 
                                 <button type="submit" class="w-full btn-primary font-bold py-3.5 px-6 rounded-lg text-lg">
-                                    <a href="thankyou.html" ></a>
                                     Confirm My Spot
-                                    
                                 </button>
                             </div>
                         </form>
@@ -296,19 +298,25 @@
                 </div>
             </div>
             
-        
-        <!-- Footer -->
-        <footer class="text-center mt-20 text-neutral-500 text-sm">
-            <div class="reveal mb-6">
-                <p class="text-neutral-400 text-sm tracking-widest uppercase">Powered by NextGenX Ai</p>
-            </div>
-            <p>&copy; 2025 [NextGenX AI, School of Engeering, IILM UNIVERSITY]. All rights reserved.</p>
-        </footer>
+    
+    <!-- Footer -->
+    <footer class="text-center mt-20 text-neutral-500 text-sm">
+        <div class="reveal mb-6">
+            <p class="text-neutral-400 text-sm tracking-widest uppercase">Powered by NextGenX Ai</p>
+        </div>
+        <p>&copy; 2025 [NextGenX AI, School of Engeering, IILM UNIVERSITY]. All rights reserved.</p>
+    </footer>
 
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // --- SUPABASE INITIALIZATION ---
+            const SUPABASE_URL = 'https://xrzoroeucxflfokoijkm.supabase.co';
+            const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhyem9yb2V1Y3hmbGZva29pamttIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc2MTg3OTYsImV4cCI6MjA3MzE5NDc5Nn0.PY9Py2WPob7twUTnV8j-x2Z107dPWIY0B2ku9XKyTwA';
+            const { createClient } = supabase;
+            const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
             // --- ANIMATED GRADIENT BACKGROUND ---
             class GradientAnimation {
                 constructor() {
@@ -463,12 +471,56 @@
 
             // --- FORM SUBMISSION ---
             const form = document.getElementById('signup-form');
-            if(form) {
-                form.addEventListener('submit', (e) => {
+            if (form) {
+                form.addEventListener('submit', async (e) => {
                     e.preventDefault();
-                    // Here, you would typically send form data to a server.
-                    // For this example, we'll just redirect to the thank you page.
-                    window.location.href = './thankyou.html';
+
+                    const submitButton = form.querySelector('button[type="submit"]');
+                    const originalButtonText = submitButton.innerHTML;
+                    submitButton.disabled = true;
+                    submitButton.innerHTML = `
+                        <span class="flex items-center justify-center">
+                            <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                            <span>Submitting...</span>
+                        </span>`;
+
+                    const formData = new FormData(form);
+                    const registrationData = {
+                        full_name: formData.get('fullName'),
+                        email: formData.get('email'),
+                        student_id: formData.get('studentId'),
+                        year_branch: formData.get('yearBranch'),
+                        phone_number: formData.get('Phone number'),
+                        excited_to_learn: formData.get('excitedToLearn')
+                    };
+
+                    try {
+                        const { data, error } = await supabaseClient
+                            .from('registrations')
+                            .insert([registrationData]);
+
+                        if (error) throw error;
+                        
+                        window.location.href = './thankyou.html';
+
+                    } catch (error) {
+                        console.error('Error submitting form:', error.message);
+                        const formContainer = document.getElementById('form-container');
+                        let errorDiv = document.getElementById('form-error');
+                        if (!errorDiv) {
+                            errorDiv = document.createElement('div');
+                            errorDiv.id = 'form-error';
+                            errorDiv.className = 'mt-4 p-3 bg-red-900/50 text-red-300 border border-red-700 rounded-lg';
+                            formContainer.appendChild(errorDiv);
+                        }
+                        errorDiv.textContent = `An error occurred: ${error.message}. Please try again.`;
+                        
+                        submitButton.disabled = false;
+                        submitButton.innerHTML = originalButtonText;
+                    }
                 });
             }
 
@@ -504,9 +556,4 @@
     </script>
 </body>
 </html>
-
-
-
-
-
 
