@@ -56,7 +56,7 @@
             border-radius: 1.5rem; /* rounded-3xl */
             transition: box-shadow 0.4s ease;
         }
-       
+        
         .form-input-container {
             position: relative;
         }
@@ -186,7 +186,7 @@
             <h1 id="main-headline" class="h1-headline text-4xl sm:text-5xl md:text-6xl font-black tracking-tighter text-white mb-4 filter-glow">
                 From Prompt to Publish
             </h1>
-            <p class="text-lg md:text-xl text-neutral-300 max-w-3xl mx-auto">
+            <p class="text-base sm:text-lg md:text-xl text-neutral-300 max-w-3xl mx-auto">
                 A hands-on workshop to build a complete website with AI using <strong class="font-bold text-white">bolt.new, Rocket.ai etc</strong>, and master workflow automation with <strong class="font-bold text-white">NextGenX Ai Club</strong>.
             </p>
         </header>
@@ -243,7 +243,8 @@
                     <div class="glass-card interactive-card p-6 reveal">
                         <h3 class="text-xl font-bold mb-4">Event Details</h3>
                         <ul class="space-y-4 text-neutral-200">
-                            <li class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-neutral-300"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> <span>Date: [24th September]</span></li>
+                            <!-- MODIFIED DATE -->
+                            <li class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-neutral-300"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> <span>Date: [12th November]</span></li>
                             <li class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-neutral-300"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> <span>Time: [10AM - 5:15PM]</span></li>
                             <li class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-neutral-300"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> <span>Venue: [Main audi, IILM University]</span></li>
                         </ul>
@@ -260,30 +261,26 @@
                         <form id="signup-form">
                             <div class="space-y-6">
                                 <div class="form-input-container">
-                                    <input type="text" id="fullName" name="fullName" required class="form-input" placeholder=" ">
-                                    <label for="fullName" class="form-label">Full Name</label>
-                                </div>
-                                <div class="form-input-container">
-                                    <input type="email" id="email" name="email" required class="form-input" placeholder=" ">
+                                    <input type="email" id="email" name="email" required class="form-input" placeholder=" "
+                                           pattern="[a-zA-Z0-9._%+-]+@iilm\.edu$"
+                                           oninvalid="this.setCustomValidity('Please use a valid IILM email address (e.g., yourname@iilm.edu)')"
+                                           oninput="this.setCustomValidity('')"
+                                    >
                                     <label for="email" class="form-label">College Email Address</label>
                                 </div>
-                                <div class="grid sm:grid-cols-2 gap-6">
-                                    <div class="form-input-container">
-                                        <input type="text" id="studentId" name="studentId" required class="form-input" placeholder=" ">
-                                        <label for="studentId" class="form-label">Student ID / Roll No.</label>
-                                    </div>
-                                    <div class="grid sm:grid-cols-2 gap-6">
-                                    <div class="form-input-container">
-                                        <input type="text" id="yearBranch" name="yearBranch" required class="form-input" placeholder=" ">
-                                        <label for="yearBranch" class="form-label">Year & Branch</label>
-                                    </div>
-                                    </div>
-                                    
-                                    <div class="form-input-container">
-                                        <input type="text" id="Phone number" name="Phone number" required class="form-input" placeholder=" ">
-                                        <label for="Phone number" class="form-label">Phone number</label>
-                                    </div>
-                                    </div>
+                                <!-- Restructured fields to be full-width -->
+                                <div class="form-input-container">
+                                    <input type="text" id="studentId" name="studentId" required class="form-input" placeholder=" ">
+                                    <label for="studentId" class="form-label">Student ID / Roll No.</label>
+                                </div>
+                                <div class="form-input-container">
+                                    <input type="text" id="yearBranch" name="yearBranch" required class="form-input" placeholder=" ">
+                                    <label for="yearBranch" class="form-label">Year & Branch</label>
+                                </div>
+                                <div class="form-input-container">
+                                    <input type="text" id="Phone number" name="Phone number" required class="form-input" placeholder=" ">
+                                    <label for="Phone number" class="form-label">Phone number</label>
+                                </div>
                                 <div class="form-input-container">
                                      <textarea id="excitedToLearn" name="excitedToLearn" rows="3" class="form-input" placeholder=" "></textarea>
                                      <label for="excitedToLearn" class="form-label">What are you most excited to learn? (Optional)</label>
@@ -298,7 +295,7 @@
                 </div>
             </div>
             
-    
+
     <!-- Footer -->
     <footer class="text-center mt-20 text-neutral-500 text-sm">
         <div class="reveal mb-6">
@@ -447,7 +444,8 @@
 
 
             // --- COUNTDOWN TIMER ---
-            const eventDate = new Date("Sep 24, 2025 10:00:00").getTime();
+            // MODIFIED DATE to November 12, 2025
+            const eventDate = new Date("Nov 12, 2025 10:00:00").getTime();
             const countdownTimer = document.getElementById('countdown-timer');
             const countdownSection = document.getElementById('countdown-section');
             if (countdownTimer) {
@@ -461,10 +459,10 @@
                     const d = Math.floor(distance/(1000*60*60*24)), h = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
                     const m = Math.floor((distance%(1000*60*60))/(1000*60)), s = Math.floor((distance%(1000*60))/1000);
                     countdownTimer.innerHTML = `
-                        <div><span class="text-3xl sm:text-4xl font-bold">${String(d).padStart(2,'0')}</span><p class="text-xs text-neutral-400">Days</p></div> <div class="text-2xl font-bold text-neutral-500">:</div>
-                        <div><span class="text-3xl sm:text-4xl font-bold">${String(h).padStart(2,'0')}</span><p class="text-xs text-neutral-400">Hours</p></div> <div class="text-2xl font-bold text-neutral-500">:</div>
-                        <div><span class="text-3xl sm:text-4xl font-bold">${String(m).padStart(2,'0')}</span><p class="text-xs text-neutral-400">Minutes</p></div> <div class="text-2xl font-bold text-neutral-500">:</div>
-                        <div><span class="text-3xl sm:text-4xl font-bold">${String(s).padStart(2,'0')}</span><p class="text-xs text-neutral-400">Seconds</p></div>
+                        <div><span class="text-2xl sm:text-3xl md:text-4xl font-bold">${String(d).padStart(2,'0')}</span><p class="text-xs text-neutral-400">Days</p></div> <div class="text-xl sm:text-2xl font-bold text-neutral-500">:</div>
+                        <div><span class="text-2xl sm:text-3xl md:text-4xl font-bold">${String(h).padStart(2,'0')}</span><p class="text-xs text-neutral-400">Hours</p></div> <div class="text-xl sm:text-2xl font-bold text-neutral-500">:</div>
+                        <div><span class="text-2xl sm:text-3xl md:text-4xl font-bold">${String(m).padStart(2,'0')}</span><p class="text-xs text-neutral-400">Minutes</p></div> <div class="text-xl sm:text-2xl font-bold text-neutral-500">:</div>
+                        <div><span class="text-2xl sm:text-3xl md:text-4xl font-bold">${String(s).padStart(2,'0')}</span><p class="text-xs text-neutral-400">Seconds</p></div>
                     `;
                 }, 1000);
             }
@@ -474,6 +472,37 @@
             if (form) {
                 form.addEventListener('submit', async (e) => {
                     e.preventDefault();
+
+                    // --- START: EMAIL VALIDATION (Fallback) ---
+                    const emailInput = form.querySelector('#email');
+                    const email = emailInput.value;
+                    const emailDomain = '@iilm.edu';
+                    const formContainer = document.getElementById('form-container'); 
+
+                    if (!email.toLowerCase().endsWith(emailDomain)) {
+                        let errorDiv = document.getElementById('form-error');
+                        if (!errorDiv) {
+                            errorDiv = document.createElement('div');
+                            errorDiv.id = 'form-error';
+                            errorDiv.className = 'mt-4 p-3 bg-red-900/50 text-red-300 border border-red-700 rounded-lg';
+                            const formDescription = formContainer.querySelector('p');
+                            if (formDescription) {
+                                formDescription.insertAdjacentElement('afterend', errorDiv);
+                            } else {
+                                formContainer.prepend(errorDiv); // Fallback
+                            }
+                        }
+                        errorDiv.textContent = 'Please use a valid IILM email address (ending in @iilm.edu).';
+                        errorDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        return; // Stop form submission
+                    }
+
+                    // Clear any previous error messages if validation passes
+                    let errorDiv = document.getElementById('form-error');
+                    if (errorDiv) {
+                        errorDiv.remove();
+                    }
+                    // --- END: EMAIL VALIDATION ---
 
                     const submitButton = form.querySelector('button[type="submit"]');
                     const originalButtonText = submitButton.innerHTML;
@@ -504,7 +533,37 @@
 
                         if (error) throw error;
                         
-                        window.location.href = './thankyou.html';
+                        // Create a thank you page if it doesn't exist
+                        // For this demo, we assume 'thankyou.html' exists.
+                        // If not, we'll just show a success message.
+                        
+                        // Check if thankyou.html exists, if not, show message
+                        fetch('./thankyou.html', { method: 'HEAD' })
+                            .then(res => {
+                                if (res.ok) {
+                                    window.location.href = './thankyou.html';
+                                } else {
+                                    // Fallback if thankyou.html is missing
+                                    const formContainer = document.getElementById('form-container');
+                                    formContainer.innerHTML = `
+                                        <h2 class="text-3xl font-bold mb-2 text-center">Thank You!</h2>
+                                        <p class="text-neutral-300 mb-6 text-center text-lg">Your registration is confirmed. We look forward to seeing you at the workshop!</p>
+                                        <div class="text-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-white mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                        </div>
+                                    `;
+                                }
+                            }).catch(() => {
+                                // Fallback on fetch error
+                                const formContainer = document.getElementById('form-container');
+                                formContainer.innerHTML = `
+                                    <h2 class="text-3xl font-bold mb-2 text-center">Thank You!</h2>
+                                    <p class="text-neutral-300 mb-6 text-center text-lg">Your registration is confirmed. We look forward to seeing you at the workshop!</p>
+                                    <div class="text-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-white mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    </div>
+                                `;
+                            });
 
                     } catch (error) {
                         console.error('Error submitting form:', error.message);
@@ -516,7 +575,12 @@
                             errorDiv.className = 'mt-4 p-3 bg-red-900/50 text-red-300 border border-red-700 rounded-lg';
                             formContainer.appendChild(errorDiv);
                         }
-                        errorDiv.textContent = `An error occurred: ${error.message}. Please try again.`;
+                        // Improved error message for duplicate email
+                        if (error.message.includes('duplicate key value violates unique constraint "registrations_email_key"')) {
+                             errorDiv.textContent = `This email address has already been registered.`;
+                        } else {
+                             errorDiv.textContent = `An error occurred: ${error.message}. Please try again.`;
+                        }
                         
                         submitButton.disabled = false;
                         submitButton.innerHTML = originalButtonText;
@@ -556,4 +620,3 @@
     </script>
 </body>
 </html>
-
