@@ -261,6 +261,10 @@
                         <form id="signup-form">
                             <div class="space-y-6">
                                 <div class="form-input-container">
+                                    <input type="text" id="fullName" name="fullName" required class="form-input" placeholder=" ">
+                                    <label for="fullName" class="form-label">Full Name</label>
+                                </div>
+                                <div class="form-input-container">
                                     <input type="email" id="email" name="email" required class="form-input" placeholder=" "
                                            pattern="[a-zA-Z0-9._%+-]+@iilm\.edu$"
                                            oninvalid="this.setCustomValidity('Please use a valid IILM email address (e.g., yourname@iilm.edu)')"
