@@ -5,10 +5,13 @@
 document.addEventListener('DOMContentLoaded', function () {
 
     // --- SUPABASE INITIALIZATION ---
-    const SUPABASE_URL = 'https://goklockrtluaeiphlqvz.supabase.co';
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdva2xvY2tydGx1YWVpcGhscXZ6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAyMjc3MDAsImV4cCI6MjA4NTgwMzcwMH0.TEXZzQSRFbZ96meglr9yURvzi-WZcO9OM23T-crg_SM';
+    const config = window._getSupabaseConfig ? window._getSupabaseConfig() : null;
+    if (!config) {
+        console.error('Configuration not loaded');
+        return;
+    }
     const { createClient } = supabase;
-    const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    const supabaseClient = createClient(config.url, config.key);
 
     // --- INITIALIZE BACKGROUND ANIMATIONS ---
     initBackgrounds(true); // Enable mouse interaction for main page
