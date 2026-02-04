@@ -75,12 +75,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Email validation
             const emailInput = form.querySelector('#email');
-            const email = emailInput.value;
-            const emailDomain = '@iilm.edu';
+            const email = emailInput.value.toLowerCase();
+            const allowedDomains = ['@iilm.edu', '@gmail.com'];
             const formContainer = document.getElementById('form-container');
 
-            if (!email.toLowerCase().endsWith(emailDomain)) {
-                showError(formContainer, 'Please use a valid IILM email address (ending in @iilm.edu).');
+            const isValidDomain = allowedDomains.some(domain => email.endsWith(domain));
+            if (!isValidDomain) {
+                showError(formContainer, 'Please use a valid email address (ending in @iilm.edu or @gmail.com).');
                 return;
             }
 
