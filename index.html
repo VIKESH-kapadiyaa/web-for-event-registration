@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>From Prompt to Publish: AI Web Dev Workshop</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body class="antialiased">
+
+    <!-- Background Canvases -->
+    <canvas id="gradient-canvas"></canvas>
+    <canvas id="particle-canvas"></canvas>
+
+    <div class="main-content-wrapper container mx-auto px-4 py-12 md:py-20 max-w-5xl">
+
+        <!-- Header Section -->
+        <header class="text-center mb-12">
+            <p class="text-neutral-400 text-sm tracking-widest uppercase mb-6">Powered by NextGenX Ai</p>
+
+            <span
+                class="inline-block bg-neutral-900 text-neutral-200 text-sm font-semibold px-4 py-1 rounded-full mb-4">
+                Exclusive College Ai Workshop
+            </span>
+            <h1 id="main-headline"
+                class="h1-headline text-4xl sm:text-5xl md:text-6xl font-black tracking-tighter text-white mb-4 filter-glow">
+                From Prompt to Publish
+            </h1>
+            <p class="text-base sm:text-lg md:text-xl text-neutral-300 max-w-3xl mx-auto">
+                A hands-on workshop to build a complete website with AI using <strong
+                    class="font-bold text-white">bolt.new, Rocket.ai etc</strong>, and master workflow automation with
+                <strong class="font-bold text-white">NextGenX Ai Club</strong>.
+            </p>
+        </header>
+
+        <!-- Countdown Timer Section -->
+        <section id="countdown-section" class="mb-16 reveal">
+            <div class="glass-card p-6 max-w-2xl mx-auto">
+                <h3 class="text-center text-neutral-300 font-semibold text-lg mb-4">Event Starts In</h3>
+                <div id="countdown-timer" class="flex justify-center items-center text-center space-x-2 md:space-x-4">
+                    <!-- Timer will be injected here by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <main class="space-y-16">
+            <!-- What You'll Learn Section -->
+            <section class="glass-card p-6 sm:p-8 md:p-12 reveal">
+                <h2 class="text-3xl font-bold mb-8 text-center">What You Will Learn</h2>
+                <div class="grid md:grid-cols-2 gap-8 reveal-stagger">
+                    <div class="feature-item flex items-start space-x-4 p-4 rounded-lg">
+                        <div class="bg-neutral-800 p-3 rounded-full flex-shrink-0 feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M10 20H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h6"></path>
+                                <polyline points="14 2 20 8 20 20 14 14 14 2"></polyline>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg text-white">AI-Powered Web Creation</h3>
+                            <p class="text-neutral-300">Build and deploy a functional website from scratch using simple
+                                text prompts on bolt.new. No code required!</p>
+                        </div>
+                    </div>
+                    <div class="feature-item flex items-start space-x-4 p-4 rounded-lg">
+                        <div class="bg-neutral-800 p-3 rounded-full flex-shrink-0 feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M12 8V4H8" />
+                                <rect x="4" y="4" width="16" height="16" rx="2" />
+                                <path d="M20 12h-4" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg text-white">Mastering Google Gemini</h3>
+                            <p class="text-neutral-300">Get an exclusive guide to leveraging Gemini for coding, content
+                                generation, and creative problem-solving.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item flex items-start space-x-4 p-4 rounded-lg">
+                        <div class="bg-neutral-800 p-3 rounded-full flex-shrink-0 feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg text-white">Automate Your Workflow</h3>
+                            <p class="text-neutral-300">Discover a suite of AI tools that can automate your daily tasks,
+                                from writing emails to debugging code.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item flex items-start space-x-4 p-4 rounded-lg">
+                        <div class="bg-neutral-800 p-3 rounded-full flex-shrink-0 feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                                <circle cx="12" cy="10" r="3" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg text-white">Build Innovative Solutions</h3>
+                            <p class="text-neutral-300">Understand the practical steps of using AI to brainstorm and
+                                build solutions for real-world problems.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Event Details & Registration Form Section -->
+            <div class="grid lg:grid-cols-3 gap-8 items-start" style="perspective: 1000px;">
+                <div class="lg:col-span-1 space-y-8">
+                    <div class="glass-card interactive-card p-6 reveal">
+                        <h3 class="text-xl font-bold mb-4">Event Details</h3>
+                        <ul class="space-y-4 text-neutral-200">
+                            <li class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="mr-3 text-neutral-300">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                                </svg>
+                                <span>Date: [12th November]</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="mr-3 text-neutral-300">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                                <span>Time: [10AM - 5:15PM]</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="mr-3 text-neutral-300">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                                <span>Venue: [Main audi, IILM University]</span>
+                            </li>
+                        </ul>
+                        <div class="mt-6 border-t border-neutral-700 pt-4 text-sm text-neutral-400">
+                            <strong>Prerequisites:</strong> None! Just bring your laptop and your curiosity.
+                        </div>
+                    </div>
+                </div>
+
+                <div id="register-form" class="lg:col-span-2 glass-card p-6 sm:p-8 md:p-12 reveal">
+                    <div id="form-container">
+                        <h2 class="text-3xl font-bold mb-2">Register Now</h2>
+                        <p class="text-neutral-300 mb-6">Seats are limited. Fill out the form to secure your spot!</p>
+                        <form id="signup-form">
+                            <div class="space-y-6">
+                                <div class="form-input-container">
+                                    <input type="text" id="fullName" name="fullName" required class="form-input"
+                                        placeholder=" ">
+                                    <label for="fullName" class="form-label">Full Name</label>
+                                </div>
+                                <div class="form-input-container">
+                                    <input type="email" id="email" name="email" required class="form-input"
+                                        placeholder=" " pattern="[a-zA-Z0-9._%+-]+@iilm\.edu$"
+                                        oninvalid="this.setCustomValidity('Please use a valid IILM email address (e.g., yourname@iilm.edu)')"
+                                        oninput="this.setCustomValidity('')">
+                                    <label for="email" class="form-label">College Email Address</label>
+                                </div>
+                                <div class="form-input-container">
+                                    <input type="text" id="studentId" name="studentId" required class="form-input"
+                                        placeholder=" ">
+                                    <label for="studentId" class="form-label">Student ID / Roll No.</label>
+                                </div>
+                                <div class="form-input-container">
+                                    <input type="text" id="yearBranch" name="yearBranch" required class="form-input"
+                                        placeholder=" ">
+                                    <label for="yearBranch" class="form-label">Year & Branch</label>
+                                </div>
+                                <div class="form-input-container">
+                                    <input type="tel" id="phoneNumber" name="phoneNumber" required class="form-input"
+                                        placeholder=" ">
+                                    <label for="phoneNumber" class="form-label">Phone Number</label>
+                                </div>
+                                <div class="form-input-container">
+                                    <textarea id="excitedToLearn" name="excitedToLearn" rows="3" class="form-input"
+                                        placeholder=" "></textarea>
+                                    <label for="excitedToLearn" class="form-label">What are you most excited to learn?
+                                        (Optional)</label>
+                                </div>
+
+                                <button type="submit"
+                                    class="w-full btn-primary font-bold py-3.5 px-6 rounded-lg text-lg">
+                                    Confirm My Spot
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="text-center mt-20 text-neutral-500 text-sm">
+            <div class="reveal mb-6">
+                <p class="text-neutral-400 text-sm tracking-widest uppercase">Powered by NextGenX Ai</p>
+            </div>
+            <p>&copy; 2025 [NextGenX AI, School of Engeering, IILM UNIVERSITY]. All rights reserved.</p>
+        </footer>
+
+    </div>
+
+    <!-- JavaScript Files -->
+    <script src="js/background.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You for Registering!</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/thankyou.css">
+</head>
+
+<body class="antialiased">
+
+    <!-- Background Canvases -->
+    <canvas id="gradient-canvas"></canvas>
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Confetti Container -->
+    <div id="confetti-container" class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none"></div>
+
+    <div class="main-content-wrapper container mx-auto px-4 py-12">
+        <div class="glass-card text-center p-8 md:p-12 max-w-lg mx-auto">
+            <!-- Animated Checkmark -->
+            <div class="mb-6">
+                <svg class="animated-checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                    <circle class="animated-checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+                    <path class="animated-checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                </svg>
+            </div>
+
+            <!-- Thank You Message -->
+            <h1 class="text-3xl md:text-4xl font-bold text-white">Thank You For Registering!</h1>
+            <p class="text-neutral-300 mt-4">We've saved your spot and can't wait to see you at the workshop. An
+                invitation with more details will be sent to your email shortly.</p>
+
+            <!-- Action Buttons -->
+            <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=From+Prompt+to+Publish:+AI+Web+Dev+Workshop&dates=20251112T043000Z/20251112T114500Z&details=A+hands-on+workshop+to+build+a+complete+website+with+AI.+Don't+forget+your+laptop!&location=Main+audi,+IILM+University"
+                    target="_blank" rel="noopener noreferrer"
+                    class="inline-block bg-white text-black font-bold py-2.5 px-6 rounded-lg hover:bg-opacity-80 transition-colors duration-300">
+                    Add to Google Calendar
+                </a>
+                <a href="index.html"
+                    class="inline-block bg-transparent border-2 border-white text-white font-bold py-2.5 px-6 rounded-lg hover:bg-white hover:text-black transition-colors duration-300">
+                    Back to Event Page
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Files -->
+    <script src="js/background.js"></script>
+    <script src="js/thankyou.js"></script>
+</body>
+
+</html>
