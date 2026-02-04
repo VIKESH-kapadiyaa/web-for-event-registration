@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
     animateHeadline();
 
     // --- COUNTDOWN TIMER ---
-    const eventDate = new Date("Feb 7, 2026 11:00:00").getTime();
+    const eventDate = new Date("Feb 8, 2026 11:00:00").getTime();
     const countdownTimer = document.getElementById('countdown-timer');
     const countdownSection = document.getElementById('countdown-section');
 
