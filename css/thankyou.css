@@ -98,3 +98,101 @@ body {
         opacity: 0;
     }
 }
+
+/* ============================================
+   THANK YOU PAGE - MOBILE RESPONSIVE
+   ============================================ */
+
+@media (max-width: 768px) {
+    body {
+        overflow-y: auto;
+        /* Allow scroll on mobile */
+        overflow-x: hidden;
+    }
+
+    .main-content-wrapper {
+        padding: 1.5rem;
+        min-height: 100vh;
+        align-items: flex-start;
+        padding-top: 3rem;
+    }
+
+    .animated-checkmark {
+        width: 50px;
+        height: 50px;
+    }
+
+    .glass-card {
+        padding: 1.5rem !important;
+        max-width: 100% !important;
+    }
+
+    .glass-card h1 {
+        font-size: 1.5rem !important;
+    }
+
+    .glass-card p {
+        font-size: 0.9rem;
+    }
+
+    /* Event reminder box */
+    .glass-card>div {
+        padding: 0.75rem !important;
+    }
+
+    /* Action buttons - stack vertically on mobile */
+    .glass-card .flex {
+        flex-direction: column !important;
+    }
+
+    .glass-card a {
+        width: 100%;
+        text-align: center;
+        padding: 0.875rem 1.5rem !important;
+        font-size: 0.9rem !important;
+    }
+
+    /* Reduce confetti count on mobile for performance */
+    .confetti {
+        animation-duration: 3s;
+    }
+}
+
+@media (max-width: 375px) {
+    .main-content-wrapper {
+        padding: 1rem;
+        padding-top: 2rem;
+    }
+
+    .animated-checkmark {
+        width: 40px;
+        height: 40px;
+    }
+
+    .glass-card h1 {
+        font-size: 1.25rem !important;
+    }
+
+    .glass-card p {
+        font-size: 0.85rem;
+    }
+}
+
+/* Reduce animations on mobile for performance */
+@media (prefers-reduced-motion: reduce) {
+
+    .animated-checkmark,
+    .animated-checkmark__circle,
+    .animated-checkmark__check,
+    .confetti {
+        animation: none !important;
+    }
+
+    .animated-checkmark__circle {
+        stroke-dashoffset: 0;
+    }
+
+    .animated-checkmark__check {
+        stroke-dashoffset: 0;
+    }
+}

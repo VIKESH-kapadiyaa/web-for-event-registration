@@ -80,8 +80,8 @@ body {
     box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
 }
 
-.form-input:focus + .form-label,
-.form-input:not(:placeholder-shown) + .form-label {
+.form-input:focus+.form-label,
+.form-input:not(:placeholder-shown)+.form-label {
     top: 0;
     font-size: 0.75rem;
     color: #ffffff;
@@ -98,7 +98,7 @@ body {
     transform: translateY(40px) scale(0.95) rotateX(-20deg);
     transform-origin: top center;
     transition: opacity 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275),
-                transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .reveal.visible {
@@ -106,14 +106,25 @@ body {
     transform: translateY(0) scale(1) rotateX(0);
 }
 
-.reveal-stagger > * {
+.reveal-stagger>* {
     transition-delay: inherit;
 }
 
-.reveal-stagger.visible > *:nth-child(1) { transition-delay: 0.1s; }
-.reveal-stagger.visible > *:nth-child(2) { transition-delay: 0.2s; }
-.reveal-stagger.visible > *:nth-child(3) { transition-delay: 0.3s; }
-.reveal-stagger.visible > *:nth-child(4) { transition-delay: 0.4s; }
+.reveal-stagger.visible>*:nth-child(1) {
+    transition-delay: 0.1s;
+}
+
+.reveal-stagger.visible>*:nth-child(2) {
+    transition-delay: 0.2s;
+}
+
+.reveal-stagger.visible>*:nth-child(3) {
+    transition-delay: 0.3s;
+}
+
+.reveal-stagger.visible>*:nth-child(4) {
+    transition-delay: 0.4s;
+}
 
 /* 2. Interactive Card Tilt Effect */
 .interactive-card {
@@ -156,7 +167,7 @@ body {
     display: inline-block;
     opacity: 0;
     animation: reveal-letter 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000) forwards,
-               letter-wave 2.2s ease-in-out infinite;
+        letter-wave 2.2s ease-in-out infinite;
 }
 
 @keyframes reveal-letter {
@@ -166,9 +177,12 @@ body {
 }
 
 @keyframes letter-wave {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: translateY(0);
     }
+
     50% {
         transform: translateY(-6px);
     }
@@ -199,4 +213,214 @@ body {
     color: #fca5a5;
     border: 1px solid #b91c1c;
     border-radius: 0.5rem;
+}
+
+/* ============================================
+   MOBILE RESPONSIVE STYLES
+   ============================================ */
+
+/* --- MOBILE BASE ADJUSTMENTS --- */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+
+    .main-content-wrapper {
+        padding: 1rem;
+        padding-top: 2rem;
+    }
+
+    /* Header adjustments */
+    .h1-headline {
+        font-size: 2rem !important;
+        line-height: 1.2;
+        word-break: break-word;
+    }
+
+    /* Glass cards - reduce padding on mobile */
+    .glass-card {
+        padding: 1.25rem !important;
+        border-radius: 1rem;
+    }
+
+    /* Form inputs - larger touch targets */
+    .form-input {
+        padding: 0.875rem;
+        font-size: 16px;
+        /* Prevents iOS zoom on focus */
+        min-height: 48px;
+    }
+
+    .form-label {
+        font-size: 0.875rem;
+    }
+
+    .form-input:focus+.form-label,
+    .form-input:not(:placeholder-shown)+.form-label {
+        font-size: 0.7rem;
+    }
+
+    /* Button - larger touch target */
+    .btn-primary {
+        padding: 1rem 1.5rem !important;
+        font-size: 1rem !important;
+        min-height: 52px;
+    }
+
+    /* Feature items - stack properly */
+    .feature-item {
+        padding: 0.75rem !important;
+    }
+
+    .feature-icon {
+        padding: 0.5rem !important;
+    }
+
+    .feature-icon svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    /* Countdown timer - smaller on mobile */
+    #countdown-timer>div>span {
+        font-size: 1.5rem !important;
+    }
+
+    #countdown-timer>div>p {
+        font-size: 0.65rem !important;
+    }
+
+    /* Disable heavy animations on mobile for performance */
+    .reveal {
+        transform: translateY(20px);
+    }
+
+    .h1-headline span {
+        animation: reveal-letter 0.5s ease forwards;
+    }
+
+    @keyframes reveal-letter {
+        to {
+            opacity: 1;
+        }
+    }
+
+    /* Disable letter wave on mobile */
+    .h1-headline span {
+        animation: reveal-letter 0.5s ease forwards !important;
+    }
+
+    /* Interactive card - disable 3D effect on touch devices */
+    .interactive-card {
+        transform: none !important;
+    }
+}
+
+/* --- SMALL MOBILE (iPhone SE, etc.) --- */
+@media (max-width: 375px) {
+    .h1-headline {
+        font-size: 1.75rem !important;
+    }
+
+    .glass-card {
+        padding: 1rem !important;
+    }
+
+    #countdown-timer {
+        gap: 0.25rem;
+    }
+
+    #countdown-timer>div>span {
+        font-size: 1.25rem !important;
+    }
+
+    .feature-item h3 {
+        font-size: 0.95rem;
+    }
+
+    .feature-item p {
+        font-size: 0.85rem;
+    }
+}
+
+/* --- TABLET ADJUSTMENTS --- */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .main-content-wrapper {
+        padding: 2rem;
+    }
+
+    .glass-card {
+        padding: 1.5rem !important;
+    }
+}
+
+/* --- TOUCH DEVICE OPTIMIZATIONS --- */
+@media (hover: none) and (pointer: coarse) {
+
+    /* Disable hover effects on touch devices */
+    .btn-primary:hover {
+        background-color: #ffffff;
+        color: #000000;
+    }
+
+    .btn-primary::before {
+        display: none;
+    }
+
+    .interactive-card:hover {
+        transform: none;
+    }
+
+    /* Add active state for touch feedback */
+    .btn-primary:active {
+        transform: scale(0.98);
+        background-color: #e5e5e5;
+    }
+
+    .glass-card:active {
+        transform: scale(0.99);
+    }
+}
+
+/* --- LANDSCAPE MOBILE --- */
+@media (max-height: 500px) and (orientation: landscape) {
+    .main-content-wrapper {
+        padding-top: 1rem;
+    }
+
+    #countdown-section {
+        margin-bottom: 1rem;
+    }
+}
+
+/* --- REDUCED MOTION (Accessibility) --- */
+@media (prefers-reduced-motion: reduce) {
+
+    .reveal,
+    .h1-headline span,
+    .feature-icon svg path,
+    .feature-icon svg circle,
+    .interactive-card,
+    .btn-primary::before {
+        animation: none !important;
+        transition: none !important;
+    }
+
+    .reveal {
+        opacity: 1;
+        transform: none;
+    }
+
+    .h1-headline span {
+        opacity: 1;
+    }
+}
+
+/* --- SAFE AREA INSETS (iPhone X+) --- */
+@supports (padding: max(0px)) {
+    .main-content-wrapper {
+        padding-left: max(1rem, env(safe-area-inset-left));
+        padding-right: max(1rem, env(safe-area-inset-right));
+        padding-bottom: max(2rem, env(safe-area-inset-bottom));
+    }
 }
