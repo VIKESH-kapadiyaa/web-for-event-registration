@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CodeBytes Phase One | DSA Competition</title>
+    <title>Algo Arena 1.0 | DSA Coding + Quiz</title>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -35,11 +35,11 @@
 
             <span
                 class="inline-block bg-neutral-900 text-neutral-200 text-sm font-semibold px-4 py-1 rounded-full mb-4">
-                🏆 DSA Competition
+                🏆 DSA Coding + Quiz
             </span>
             <h1 id="main-headline"
                 class="h1-headline text-4xl sm:text-5xl md:text-6xl font-black tracking-tighter text-white mb-4 filter-glow">
-                CodeBytes Phase One
+                Algo Arena 1.0
             </h1>
             <p class="text-base sm:text-lg md:text-xl text-neutral-300 max-w-3xl mx-auto">
                 Prove your coding skills in the ultimate <strong class="font-bold text-white">Data Structures &
@@ -96,7 +96,7 @@
                         <div>
                             <h3 class="font-bold text-lg text-white">Best Programmer Certificate</h3>
                             <p class="text-neutral-300">Earn an official certificate recognizing you as the Best
-                                Programmer of CodeBytes Phase One!</p>
+                                Programmer of Algo Arena 1.0!</p>
                         </div>
                     </div>
                 </div>
@@ -178,17 +178,47 @@
                 <div class="lg:col-span-1 space-y-8">
                     <div class="glass-card interactive-card p-6 reveal">
                         <h3 class="text-xl font-bold mb-4">📅 Event Details</h3>
+
+                        <div class="mb-6 space-y-3">
+                            <div class="p-3 bg-neutral-800/50 rounded-lg border border-neutral-700">
+                                <h4 class="font-bold text-white mb-1 text-sm uppercase">👤 Individual Participation</h4>
+                                <p class="text-sm text-neutral-300">No teamings allowed.</p>
+                            </div>
+                            <div class="p-3 bg-neutral-800/50 rounded-lg border border-neutral-700">
+                                <h4 class="font-bold text-white mb-1 text-sm uppercase">🔄 Weekly Contest</h4>
+                                <p class="text-sm text-neutral-300">Registration must be completed separately for each
+                                    round.</p>
+                            </div>
+                            <div class="p-3 bg-neutral-800/50 rounded-lg border border-neutral-700">
+                                <h4 class="font-bold text-white mb-1 text-sm uppercase">🏆 Prize Awaits</h4>
+                                <p class="text-sm text-neutral-300">The top performer gets the ensured prize.</p>
+                            </div>
+                        </div>
+
                         <ul class="space-y-4 text-neutral-200">
-                            <li class="flex items-center">
+                            <li class="flex items-start">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="mr-3 text-neutral-300">
+                                    stroke-linejoin="round" class="mr-3 text-neutral-300 mt-1">
                                     <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
                                     <line x1="16" y1="2" x2="16" y2="6"></line>
                                     <line x1="8" y1="2" x2="8" y2="6"></line>
                                     <line x1="3" y1="10" x2="21" y2="10"></line>
                                 </svg>
-                                <span>Date: <strong>Saturday, 8th February 2026</strong></span>
+                                <div>
+                                    <span class="font-semibold block mb-2">Competition Rounds:</span>
+                                    <ul class="text-sm space-y-2 text-neutral-300">
+                                        <li class="flex items-center"><span class="w-20 font-mono">Round 1:</span>
+                                            <strong class="text-white">14/02/2026</strong>
+                                        </li>
+                                        <li class="flex items-center"><span class="w-20 font-mono">Round 2:</span>
+                                            <strong class="text-white">21/02/2026</strong>
+                                        </li>
+                                        <li class="flex items-center"><span class="w-20 font-mono">Round 3:</span>
+                                            <strong class="text-white">28/02/2026</strong>
+                                        </li>
+                                    </ul>
+                                </div>
                             </li>
                             <li class="flex items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
@@ -206,7 +236,7 @@
                                     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                                     <circle cx="12" cy="10" r="3"></circle>
                                 </svg>
-                                <span>Venue: <strong>Engineering Block, IILM University</strong></span>
+                                <span>Venue: <strong>Law Block, IILM University</strong></span>
                             </li>
                         </ul>
                         <div class="mt-6 border-t border-neutral-700 pt-4 text-sm text-neutral-400">
@@ -254,6 +284,32 @@
                                         placeholder=" "></textarea>
                                     <label for="excitedToLearn" class="form-label">Which DSA topic are you strongest in?
                                         (Optional)</label>
+                                </div>
+
+                                <div class="form-input-container space-y-3">
+                                    <label class="text-neutral-300 text-sm font-semibold">Select Session Date</label>
+                                    <div class="space-y-2">
+                                        <label
+                                            class="flex items-center space-x-3 p-3 rounded-lg border border-neutral-700 bg-neutral-800/50 hover:bg-neutral-800 transition-colors cursor-pointer">
+                                            <input type="radio" name="eventDate" value="2026-02-14"
+                                                class="form-radio text-green-500 focus:ring-green-500 h-5 w-5" checked>
+                                            <span class="text-white">Round 1: 14/02/2026</span>
+                                        </label>
+                                        <label
+                                            class="flex items-center space-x-3 p-3 rounded-lg border border-neutral-800 bg-neutral-900/50 opacity-60 cursor-not-allowed">
+                                            <input type="radio" name="eventDate" value="2026-02-21"
+                                                class="form-radio text-neutral-600 focus:ring-neutral-600 h-5 w-5"
+                                                disabled>
+                                            <span class="text-neutral-400">Round 2: 21/02/2026 (Locked)</span>
+                                        </label>
+                                        <label
+                                            class="flex items-center space-x-3 p-3 rounded-lg border border-neutral-800 bg-neutral-900/50 opacity-60 cursor-not-allowed">
+                                            <input type="radio" name="eventDate" value="2026-02-28"
+                                                class="form-radio text-neutral-600 focus:ring-neutral-600 h-5 w-5"
+                                                disabled>
+                                            <span class="text-neutral-400">Round 3: 28/02/2026 (Locked)</span>
+                                        </label>
+                                    </div>
                                 </div>
 
                                 <button type="submit"

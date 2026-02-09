@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
     animateHeadline();
 
     // --- COUNTDOWN TIMER ---
-    const eventDate = new Date("Feb 8, 2026 11:00:00").getTime();
+    const eventDate = new Date("Feb 14, 2026 11:00:00").getTime();
     const countdownTimer = document.getElementById('countdown-timer');
     const countdownSection = document.getElementById('countdown-section');
 
@@ -109,7 +109,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 student_id: formData.get('studentId'),
                 year_branch: formData.get('yearBranch'),
                 phone_number: formData.get('phoneNumber'),
-                excited_to_learn: formData.get('excitedToLearn')
+                excited_to_learn: formData.get('excitedToLearn'),
+                event_date: formData.get('eventDate') || '2026-02-14' // Default to first round if missing
             };
 
             try {
@@ -136,8 +137,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.error('Error submitting form:', error.message);
 
                 let errorMessage = `An error occurred: ${error.message}. Please try again.`;
-                if (error.message.includes('duplicate key value violates unique constraint "registrations_email_key"')) {
-                    errorMessage = 'This email address has already been registered.';
+                if (error.message.includes('duplicate key value violates unique constraint "registrations_email_key"') ||
+                    error.message.includes('unique_registration_per_date')) {
+                    errorMessage = 'This email address has already been registered for this date.';
                 }
 
                 showError(formContainer, errorMessage);
