@@ -4,339 +4,1012 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Algo Arena 1.0 | DSA Coding + Quiz</title>
-
-    <!-- Tailwind CSS -->
+    <title>NextGenX AI — AI Learner 1.0 | Application</title>
+    <meta name="description" content="Apply for the NextGenX AI Learner Community AI Learner 1.0 batch. Only 50 seats.">
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
-
-    <!-- Custom Styles -->
     <link rel="stylesheet" href="css/styles.css">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box
+        }
 
-    <!-- Supabase JS -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+        .hero-integrated {
+            position: relative;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, .1);
+            box-shadow: 0 20px 80px rgba(0, 0, 0, .8), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+            padding: 5rem 2rem 6rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-integrated video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            opacity: 0.65;
+            transition: opacity 0.5s ease;
+        }
+
+        .hero-integrated:hover video {
+            opacity: 0.8;
+        }
+
+        .hero-integrated-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(5, 5, 5, 0.4) 0%, rgba(5, 5, 5, 0.85) 100%),
+                radial-gradient(circle at center, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.7) 100%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .hero-integrated-content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+        }
+
+        .urgency-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            background: rgba(220, 38, 38, .1);
+            border: 1px solid rgba(220, 38, 38, .35);
+            border-radius: 2rem;
+            padding: .4rem 1rem;
+            font-size: .78rem;
+            font-weight: 600;
+            color: #fca5a5
+        }
+
+        .dot-live {
+            width: 6px;
+            height: 6px;
+            background: #ef4444;
+            border-radius: 50%;
+            flex-shrink: 0;
+            animation: blink 1.4s ease-in-out infinite
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1)
+            }
+
+            50% {
+                opacity: .5;
+                transform: scale(1.5)
+            }
+        }
+
+        .batch-tag {
+            display: inline-block;
+            background: rgba(255, 255, 255, .06);
+            border: 1px solid rgba(255, 255, 255, .12);
+            border-radius: 2rem;
+            padding: .3rem .85rem;
+            font-size: .7rem;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, .7)
+        }
+
+        .stats-strip {
+            display: flex;
+            flex-wrap: wrap
+        }
+
+        .s-cell {
+            flex: 1 1 90px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: .15rem;
+            padding: 1rem .75rem;
+            border-right: 1px solid rgba(255, 255, 255, .06)
+        }
+
+        .s-cell:last-child {
+            border-right: none
+        }
+
+        .s-val {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: #fff;
+            line-height: 1
+        }
+
+        .s-lbl {
+            font-size: .6rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: .12em;
+            text-align: center
+        }
+
+        .sh-over {
+            font-size: .62rem;
+            font-weight: 700;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            color: #444;
+            margin-bottom: .3rem
+        }
+
+        .sh-h {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: #fff;
+            line-height: 1.15;
+            margin-bottom: .3rem
+        }
+
+        .sh-sub {
+            font-size: .8rem;
+            color: #666
+        }
+
+        .img-banner {
+            position: relative;
+            border-radius: 1rem;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, .05)
+        }
+
+        .img-banner img {
+            width: 100%;
+            display: block;
+            transition: transform .7s ease
+        }
+
+        .img-banner:hover img {
+            transform: scale(1.02)
+        }
+
+        .img-banner-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            background: rgba(0, 0, 0, .45);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 1.5rem
+        }
+
+        .img-banner::before,
+        .img-banner::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 25%;
+            z-index: 1;
+            pointer-events: none
+        }
+
+        .img-banner::before {
+            top: 0;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, .6) 0%, transparent 100%)
+        }
+
+        .img-banner::after {
+            bottom: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, .6) 0%, transparent 100%)
+        }
+
+        .duo {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            align-items: center
+        }
+
+        @media(min-width:768px) {
+            .duo {
+                grid-template-columns: 1fr 1fr
+            }
+
+            .duo.flip {
+                direction: rtl
+            }
+
+            .duo.flip>* {
+                direction: ltr
+            }
+        }
+
+        .img-frame {
+            position: relative;
+            border-radius: .875rem;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, .06);
+            background: #080808
+        }
+
+        .img-frame img {
+            width: 100%;
+            display: block;
+            transition: transform .6s ease
+        }
+
+        .img-frame:hover img {
+            transform: scale(1.025)
+        }
+
+        .wc {
+            border-radius: .75rem;
+            padding: .9rem 1rem;
+            border: 1px solid transparent;
+            transition: transform .2s ease
+        }
+
+        .wc:hover {
+            transform: translateY(-1px)
+        }
+
+        .wc.g {
+            background: rgba(22, 163, 74, .06);
+            border-color: rgba(22, 163, 74, .2)
+        }
+
+        .wc.r {
+            background: rgba(220, 38, 38, .06);
+            border-color: rgba(220, 38, 38, .2)
+        }
+
+        .wc-tag {
+            display: inline-block;
+            font-size: .6rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            padding: .15rem .5rem;
+            border-radius: 1rem;
+            margin-bottom: .45rem
+        }
+
+        .wc.g .wc-tag {
+            background: rgba(22, 163, 74, .1);
+            color: #4ade80
+        }
+
+        .wc.r .wc-tag {
+            background: rgba(220, 38, 38, .1);
+            color: #f87171
+        }
+
+        .ts {
+            display: flex;
+            gap: .75rem;
+            padding: .7rem .75rem;
+            border-radius: .75rem;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: all .2s
+        }
+
+        .ts:hover,
+        .ts.on {
+            background: rgba(255, 255, 255, .03);
+            border-color: rgba(255, 255, 255, .07)
+        }
+
+        .ts-n {
+            flex-shrink: 0;
+            width: 1.7rem;
+            height: 1.7rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: .7rem;
+            font-weight: 700;
+            background: rgba(255, 255, 255, .05);
+            border: 1px solid rgba(255, 255, 255, .12);
+            color: #555;
+            transition: all .2s
+        }
+
+        .ts.on .ts-n,
+        .ts:hover .ts-n {
+            background: #fff;
+            color: #000;
+            border-color: #fff
+        }
+
+        .ts-line {
+            width: 1px;
+            height: .8rem;
+            background: rgba(255, 255, 255, .06);
+            margin-left: .85rem
+        }
+
+        .ts-extra {
+            overflow: hidden;
+            max-height: 0;
+            opacity: 0;
+            transition: max-height .35s ease, opacity .25s ease, margin .3s ease;
+            margin-top: 0
+        }
+
+        .ts.on .ts-extra {
+            max-height: 140px;
+            opacity: 1;
+            margin-top: .5rem
+        }
+
+        .fc-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: .65rem
+        }
+
+        @media(max-width:768px) {
+            .fc-grid {
+                grid-template-columns: repeat(2, 1fr)
+            }
+        }
+
+        .fc {
+            perspective: 800px;
+            height: 105px;
+            cursor: pointer
+        }
+
+        .fc-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform .5s cubic-bezier(.4, 0, .2, 1)
+        }
+
+        .fc:hover .fc-inner {
+            transform: rotateY(180deg)
+        }
+
+        .fc-f,
+        .fc-b {
+            position: absolute;
+            inset: 0;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            border-radius: .75rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: .7rem;
+            text-align: center
+        }
+
+        .fc-f {
+            background: rgba(18, 18, 18, .85);
+            border: 1px solid rgba(255, 255, 255, .07)
+        }
+
+        .fc-b {
+            background: rgba(30, 30, 30, .95);
+            border: 1px solid rgba(255, 255, 255, .1);
+            transform: rotateY(180deg)
+        }
+
+        .fc-f .em {
+            font-size: 1.4rem;
+            margin-bottom: .3rem
+        }
+
+        .fc-f .tt {
+            font-size: .68rem;
+            font-weight: 700;
+            color: #d4d4d4
+        }
+
+        .fc-b p {
+            font-size: .66rem;
+            color: #a3a3a3;
+            line-height: 1.45
+        }
+
+        .sv-card {
+            background: rgba(127, 29, 29, .08);
+            border: 1px solid rgba(220, 38, 38, .22);
+            border-radius: .75rem;
+            padding: .85rem 1rem;
+            transition: background .2s, border-color .2s
+        }
+
+        .sv-card:hover {
+            background: rgba(127, 29, 29, .18);
+            border-color: rgba(220, 38, 38, .38)
+        }
+
+        .wg {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .5rem .75rem;
+            background: rgba(16, 16, 16, .6);
+            border: 1px solid rgba(50, 50, 50, .3);
+            border-radius: .6rem
+        }
+
+        .wg span {
+            color: #444;
+            text-decoration: line-through;
+            font-size: .82rem
+        }
+
+        .prog-track {
+            height: 2px;
+            background: rgba(255, 255, 255, .06);
+            border-radius: 2rem;
+            overflow: hidden
+        }
+
+        .prog-fill {
+            height: 100%;
+            background: #fff;
+            border-radius: 2rem;
+            transition: width .5s ease
+        }
+
+        .step-panel {
+            display: none
+        }
+
+        .step-panel.active {
+            display: block
+        }
+
+        .form-note {
+            font-size: .68rem;
+            color: #444;
+            margin-top: .25rem;
+            padding-left: .15rem
+        }
+
+        .phone-wrap {
+            position: relative
+        }
+
+        .phone-pre {
+            position: absolute;
+            left: .9rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+            font-size: .85rem;
+            pointer-events: none;
+            z-index: 2
+        }
+
+        .phone-wrap .form-input {
+            padding-left: 3.2rem
+        }
+
+        .accept-box {
+            width: 1rem;
+            height: 1rem;
+            accent-color: #fff;
+            cursor: pointer;
+            flex-shrink: 0
+        }
+
+        .cap-pill {
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 4;
+            background: rgba(0, 0, 0, .55);
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(255, 255, 255, .08);
+            border-radius: 2rem;
+            padding: .3rem .9rem;
+            font-size: .62rem;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, .55);
+            white-space: nowrap
+        }
+
+        @media(max-width:640px) {
+            .s-cell {
+                padding: .7rem .35rem
+            }
+
+            .s-val {
+                font-size: 1.15rem
+            }
+        }
+    </style>
 </head>
 
 <body class="antialiased">
-
-    <!-- Background Canvases -->
     <canvas id="gradient-canvas"></canvas>
     <canvas id="particle-canvas"></canvas>
+    <div class="main-content-wrapper container mx-auto px-4 py-8 md:py-12 max-w-4xl">
+        <!-- HERO SECTION -->
+        <header class="hero-integrated reveal-zoom"
+            style="border-radius: 1.5rem; padding: 4rem 1.5rem 5rem; margin-bottom: 2.5rem; background: #000; overflow: hidden; position: relative;">
+            <video autoplay muted loop playsinline
+                style="object-position: center; pointer-events: none; position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; opacity: 0.65;">
+                <source src="images/hero-video.mp4" type="video/mp4">
+            </video>
+            <div class="hero-integrated-overlay"
+                style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(5,5,5,0.4) 0%, rgba(5,5,5,0.85) 100%), radial-gradient(circle at center, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.7) 100%); z-index: 1;">
+            </div>
 
-    <div class="main-content-wrapper container mx-auto px-4 py-12 md:py-20 max-w-5xl">
+            <div
+                class="hero-integrated-content relative z-10 w-full flex flex-col items-center justify-center text-center">
+                <p class="text-neutral-400 text-[0.65rem] sm:text-xs tracking-[0.2em] sm:tracking-widest uppercase mb-4 sm:mb-5 font-bold"
+                    style="letter-spacing: 0.25em;">Powered by NextGenX AI</p>
 
-        <!-- Header Section -->
-        <header class="text-center mb-12">
-            <p class="text-neutral-400 text-sm tracking-widest uppercase mb-6">Powered by NextGenX Ai</p>
+                <div class="mb-4 sm:mb-5">
+                    <div class="urgency-pill reveal inline-flex items-center justify-center"
+                        style="background: rgba(220, 38, 38, 0.15); border: 1px solid rgba(220, 38, 38, 0.3); backdrop-filter: blur(4px); padding: 0.4rem 0.9rem; font-size: 0.75rem;">
+                        <span class="dot-live"></span><span class="ml-1.5">Only <strong class="text-white">50</strong>
+                            Seats — Applications Open</span>
+                    </div>
+                </div>
 
-            <span
-                class="inline-block bg-neutral-900 text-neutral-200 text-sm font-semibold px-4 py-1 rounded-full mb-4">
-                🏆 DSA Coding + Quiz
-            </span>
-            <h1 id="main-headline"
-                class="h1-headline text-4xl sm:text-5xl md:text-6xl font-black tracking-tighter text-white mb-4 filter-glow">
-                Algo Arena 1.0
-            </h1>
-            <p class="text-base sm:text-lg md:text-xl text-neutral-300 max-w-3xl mx-auto">
-                Prove your coding skills in the ultimate <strong class="font-bold text-white">Data Structures &
-                    Algorithms</strong> quiz competition. Compete, conquer, and claim the title of <strong
-                    class="font-bold text-white">Best Programmer</strong>!
-            </p>
+                <div class="batch-tag mb-4 sm:mb-5 reveal inline-flex"
+                    style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15); backdrop-filter: blur(6px); color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.5); padding: 0.5rem 1.2rem; border-radius: 2rem;">
+                    🚀 NextGenX AI Learner 1.0</div>
+
+                <h1 id="main-headline" class="h1-headline font-black tracking-tight text-white mb-5 sm:mb-6 filter-glow"
+                    style="font-size:clamp(2.2rem,8vw,4.5rem);line-height:1.15; text-shadow: 0 10px 40px rgba(0,0,0,0.95); letter-spacing: -0.02em;">
+                    NextGenX AI<br>Learner 1.0
+                </h1>
+
+                <p class="text-neutral-300 leading-relaxed mx-auto mb-7 sm:mb-8 font-medium px-2 sm:px-0"
+                    style="font-size:clamp(0.85rem,2.2vw,1.1rem);max-width:40rem; text-shadow: 0 4px 15px rgba(0,0,0,1);">
+                    An exclusive, high-intensity batch for the
+                    <strong class="text-white">top 50 students</strong> genuinely committed to mastering the future of
+                    technology. This is <strong class="text-white">not just a course</strong> — it is a commitment to
+                    growth, contribution, and building the next generation of AI.
+                </p>
+
+                <a href="#register-form"
+                    class="btn-primary reveal inline-flex items-center justify-center w-full sm:w-auto"
+                    style="padding:1rem 2.8rem;font-size:1.05rem;font-weight:700;box-shadow: 0 0 40px rgba(255,255,255,0.15), inset 0 1px 0 rgba(255,255,255,0.3); letter-spacing: 0.05em; border-radius: 3rem;">Apply
+                    Now →</a>
+            </div>
         </header>
 
-        <!-- Countdown Timer Section -->
-        <section id="countdown-section" class="mb-16 reveal">
-            <div class="glass-card p-6 max-w-2xl mx-auto">
-                <h3 class="text-center text-neutral-300 font-semibold text-lg mb-4">Competition Starts In</h3>
-                <div id="countdown-timer" class="flex justify-center items-center text-center space-x-2 md:space-x-4">
-                    <!-- Timer will be injected here by JavaScript -->
+        <!-- STATS BAR -->
+        <div class="glass-card reveal-shock mb-10" style="padding:0;overflow:hidden;">
+            <div class="stats-strip">
+                <div class="s-cell"><span class="s-val" data-count="50">0</span><span class="s-lbl">Elite
+                        Seats</span>
+                </div>
+                <div class="s-cell"><span class="s-val">0→AI</span><span class="s-lbl">No Prerequisites</span></div>
+                <div class="s-cell"><span class="s-val">100%</span><span class="s-lbl">Free Courses</span></div>
+                <div class="s-cell"><span class="s-val">Google</span><span class="s-lbl">Office Visits</span></div>
+                <div class="s-cell"><span class="s-val">∞</span><span class="s-lbl">Knowledge</span></div>
+            </div>
+        </div>
+
+        <main class="space-y-10">
+
+            <!-- GLITCH STATUE BANNER -->
+            <div class="img-banner reveal-zoom">
+                <img src="images/glitch-statue.png" alt="AI meets human intelligence">
+                <div class="img-banner-overlay">
+                    <p class="text-xs text-neutral-500 tracking-widest uppercase mb-1.5">NextGenX AI — AI Learner
+                        1.0
+                    </p>
+                    <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight">See the Future. Build It.
+                    </h2>
+                    <p class="text-neutral-400 text-xs mt-1 max-w-sm">Where ancient discipline meets the
+                        intelligence of
+                        tomorrow.</p>
                 </div>
             </div>
-        </section>
 
-        <main class="space-y-16">
-            <!-- Prizes Section -->
-            <section class="glass-card p-6 sm:p-8 md:p-12 reveal">
-                <h2 class="text-3xl font-bold mb-8 text-center">🎁 Prizes & Rewards</h2>
-                <div class="grid md:grid-cols-2 gap-8 reveal-stagger">
-                    <div class="feature-item flex items-start space-x-4 p-4 rounded-lg">
-                        <div class="bg-neutral-800 p-3 rounded-full flex-shrink-0 feature-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
-                                <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
-                                <path d="M4 22h16"></path>
-                                <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
-                                <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
-                                <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
-                            </svg>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-lg text-white">Winner's Trophy</h3>
-                            <p class="text-neutral-300">The champion takes home an exclusive trophy as a symbol of their
-                                coding excellence!</p>
-                        </div>
-                    </div>
-                    <div class="feature-item flex items-start space-x-4 p-4 rounded-lg">
-                        <div class="bg-neutral-800 p-3 rounded-full flex-shrink-0 feature-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <rect x="3" y="4" width="18" height="16" rx="2" />
-                                <path d="M7 8h10" />
-                                <path d="M7 12h10" />
-                                <path d="M7 16h6" />
-                            </svg>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-lg text-white">Best Programmer Certificate</h3>
-                            <p class="text-neutral-300">Earn an official certificate recognizing you as the Best
-                                Programmer of Algo Arena 1.0!</p>
-                        </div>
+            <!-- WHO WE ARE LOOKING FOR -->
+            <section class="glass-card p-5 sm:p-8 reveal-left">
+                <div class="mb-5">
+                    <p class="sh-over">Eligibility</p>
+                    <h2 class="sh-h">👀 Who Are We Looking For?</h2>
+                    <p class="sh-sub">We are very specific about who gets in.</p>
+                </div>
+                <div class="duo mb-6">
+                    <div class="img-frame feature-item"><img src="images/focus.png" alt="FOCUS — the mindset we require"
+                            loading="lazy"></div>
+                    <div class="space-y-3">
+                        <p class="text-neutral-300 text-sm leading-relaxed">We are not looking for the <strong
+                                class="text-white">most experienced</strong> or the most talented. We are looking
+                            for
+                            the most <strong class="text-white">hungry</strong>.</p>
+                        <p class="text-neutral-500 text-sm leading-relaxed">The ones who wake up thinking about what
+                            they want to build. The ones who refuse to settle. If that is you — <strong
+                                class="text-neutral-200">this batch was made for you.</strong></p>
                     </div>
                 </div>
-            </section>
-
-            <!-- What to Expect Section -->
-            <section class="glass-card p-6 sm:p-8 md:p-12 reveal">
-                <h2 class="text-3xl font-bold mb-8 text-center">What to Expect</h2>
-                <div class="grid md:grid-cols-2 gap-8 reveal-stagger">
-                    <div class="feature-item flex items-start space-x-4 p-4 rounded-lg">
-                        <div class="bg-neutral-800 p-3 rounded-full flex-shrink-0 feature-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
-                                <polyline points="14 2 14 8 20 8" />
-                                <path d="M12 18v-6" />
-                                <path d="M9 15l3 3 3-3" />
-                            </svg>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-lg text-white">DSA Quiz Challenge</h3>
-                            <p class="text-neutral-300">Test your knowledge on Arrays, Linked Lists, Trees, Graphs,
-                                Sorting, Searching, and more!</p>
-                        </div>
+                <div class="grid md:grid-cols-3 gap-2.5 reveal-stagger">
+                    <div class="wc g feature-item">
+                        <div class="wc-tag">✅ We Want</div>
+                        <h3 class="font-bold text-white text-xs mb-0.5">Interest and Commitment</h3>
+                        <p class="text-neutral-500 text-xs leading-relaxed">Genuinely hungry to learn — not just
+                            ticking
+                            boxes.</p>
                     </div>
-                    <div class="feature-item flex items-start space-x-4 p-4 rounded-lg">
-                        <div class="bg-neutral-800 p-3 rounded-full flex-shrink-0 feature-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <circle cx="12" cy="12" r="10" />
-                                <polyline points="12 6 12 12 16 14" />
-                            </svg>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-lg text-white">Time-Bound Rounds</h3>
-                            <p class="text-neutral-300">Compete under pressure with timed rounds designed to test speed
-                                and accuracy.</p>
-                        </div>
+                    <div class="wc g feature-item">
+                        <div class="wc-tag">✅ It is Okay</div>
+                        <h3 class="font-bold text-white text-xs mb-0.5">No Prerequisites</h3>
+                        <p class="text-neutral-500 text-xs leading-relaxed">No coding knowledge needed. We start
+                            from
+                            absolute scratch.</p>
                     </div>
-                    <div class="feature-item flex items-start space-x-4 p-4 rounded-lg">
-                        <div class="bg-neutral-800 p-3 rounded-full flex-shrink-0 feature-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                                <circle cx="9" cy="7" r="4" />
-                                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-                                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                            </svg>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-lg text-white">Compete with Peers</h3>
-                            <p class="text-neutral-300">Challenge fellow students and see where you stand among the best
-                                coders on campus!</p>
-                        </div>
-                    </div>
-                    <div class="feature-item flex items-start space-x-4 p-4 rounded-lg">
-                        <div class="bg-neutral-800 p-3 rounded-full flex-shrink-0 feature-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <polygon
-                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                            </svg>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-lg text-white">Recognition & Glory</h3>
-                            <p class="text-neutral-300">Top performers will be recognized and celebrated by the NextGenX
-                                AI community!</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Event Details & Registration Form Section -->
-            <div class="grid lg:grid-cols-3 gap-8 items-start" style="perspective: 1000px;">
-                <div class="lg:col-span-1 space-y-8">
-                    <div class="glass-card interactive-card p-6 reveal">
-                        <h3 class="text-xl font-bold mb-4">📅 Event Details</h3>
-
-                        <div class="mb-6 space-y-3">
-                            <div class="p-3 bg-neutral-800/50 rounded-lg border border-neutral-700">
-                                <h4 class="font-bold text-white mb-1 text-sm uppercase">👤 Individual Participation</h4>
-                                <p class="text-sm text-neutral-300">No teamings allowed.</p>
-                            </div>
-                            <div class="p-3 bg-neutral-800/50 rounded-lg border border-neutral-700">
-                                <h4 class="font-bold text-white mb-1 text-sm uppercase">🔄 Weekly Contest</h4>
-                                <p class="text-sm text-neutral-300">Registration must be completed separately for each
-                                    round.</p>
-                            </div>
-                            <div class="p-3 bg-neutral-800/50 rounded-lg border border-neutral-700">
-                                <h4 class="font-bold text-white mb-1 text-sm uppercase">🏆 Prize Awaits</h4>
-                                <p class="text-sm text-neutral-300">The top performer gets the ensured prize.</p>
-                            </div>
-                        </div>
-
-                        <ul class="space-y-4 text-neutral-200">
-                            <li class="flex items-start">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="mr-3 text-neutral-300 mt-1">
-                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                                    <line x1="16" y1="2" x2="16" y2="6"></line>
-                                    <line x1="8" y1="2" x2="8" y2="6"></line>
-                                    <line x1="3" y1="10" x2="21" y2="10"></line>
-                                </svg>
-                                <div>
-                                    <span class="font-semibold block mb-2">Competition Rounds:</span>
-                                    <ul class="text-sm space-y-2 text-neutral-300">
-                                        <li class="flex items-center"><span class="w-20 font-mono">Round 1:</span>
-                                            <strong class="text-white">14/02/2026</strong>
-                                        </li>
-                                        <li class="flex items-center"><span class="w-20 font-mono">Round 2:</span>
-                                            <strong class="text-white">21/02/2026</strong>
-                                        </li>
-                                        <li class="flex items-center"><span class="w-20 font-mono">Round 3:</span>
-                                            <strong class="text-white">28/02/2026</strong>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="mr-3 text-neutral-300">
-                                    <circle cx="12" cy="12" r="10"></circle>
-                                    <polyline points="12 6 12 12 16 14"></polyline>
-                                </svg>
-                                <span>Time: <strong>11:00 AM - 1:00 PM</strong></span>
-                            </li>
-                            <li class="flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="mr-3 text-neutral-300">
-                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                                    <circle cx="12" cy="10" r="3"></circle>
-                                </svg>
-                                <span>Venue: <strong>Law Block, IILM University</strong></span>
-                            </li>
-                        </ul>
-                        <div class="mt-6 border-t border-neutral-700 pt-4 text-sm text-neutral-400">
-                            <strong>What to bring:</strong> Just yourself and your DSA knowledge! 💡
-                        </div>
-                    </div>
-                </div>
-
-                <div id="register-form" class="lg:col-span-2 glass-card p-6 sm:p-8 md:p-12 reveal">
-                    <div id="form-container">
-                        <h2 class="text-3xl font-bold mb-2">Register Now</h2>
-                        <p class="text-neutral-300 mb-6">Limited seats available! Register to compete for the trophy! 🏆
+                    <div class="wc r feature-item">
+                        <div class="wc-tag">❌ Not Okay</div>
+                        <h3 class="font-bold text-white text-xs mb-0.5">Letting This Pass</h3>
+                        <p class="text-neutral-500 text-xs leading-relaxed">We want contributors, not spectators.
                         </p>
-                        <form id="signup-form">
-                            <div class="space-y-6">
-                                <div class="form-input-container">
-                                    <input type="text" id="fullName" name="fullName" required class="form-input"
-                                        placeholder=" ">
-                                    <label for="fullName" class="form-label">Full Name</label>
-                                </div>
-                                <div class="form-input-container">
-                                    <input type="email" id="email" name="email" required class="form-input"
-                                        placeholder=" " pattern="[a-zA-Z0-9._%+-]+@iilm\.edu$"
-                                        oninvalid="this.setCustomValidity('Please use a valid IILM email address (e.g., yourname@iilm.edu)')"
-                                        oninput="this.setCustomValidity('')">
-                                    <label for="email" class="form-label">College Email Address</label>
-                                </div>
-                                <div class="form-input-container">
-                                    <input type="text" id="studentId" name="studentId" required class="form-input"
-                                        placeholder=" ">
-                                    <label for="studentId" class="form-label">Student ID / Roll No.</label>
-                                </div>
-                                <div class="form-input-container">
-                                    <input type="text" id="yearBranch" name="yearBranch" required class="form-input"
-                                        placeholder=" ">
-                                    <label for="yearBranch" class="form-label">Year & Branch</label>
-                                </div>
-                                <div class="form-input-container">
-                                    <input type="tel" id="phoneNumber" name="phoneNumber" required class="form-input"
-                                        placeholder=" ">
-                                    <label for="phoneNumber" class="form-label">Phone Number</label>
-                                </div>
-                                <div class="form-input-container">
-                                    <textarea id="excitedToLearn" name="excitedToLearn" rows="3" class="form-input"
-                                        placeholder=" "></textarea>
-                                    <label for="excitedToLearn" class="form-label">Which DSA topic are you strongest in?
-                                        (Optional)</label>
-                                </div>
-
-                                <div class="form-input-container space-y-3">
-                                    <label class="text-neutral-300 text-sm font-semibold">Select Session Date</label>
-                                    <div class="space-y-2">
-                                        <label
-                                            class="flex items-center space-x-3 p-3 rounded-lg border border-neutral-700 bg-neutral-800/50 hover:bg-neutral-800 transition-colors cursor-pointer">
-                                            <input type="radio" name="eventDate" value="2026-02-14"
-                                                class="form-radio text-green-500 focus:ring-green-500 h-5 w-5" checked>
-                                            <span class="text-white">Round 1: 14/02/2026</span>
-                                        </label>
-                                        <label
-                                            class="flex items-center space-x-3 p-3 rounded-lg border border-neutral-800 bg-neutral-900/50 opacity-60 cursor-not-allowed">
-                                            <input type="radio" name="eventDate" value="2026-02-21"
-                                                class="form-radio text-neutral-600 focus:ring-neutral-600 h-5 w-5"
-                                                disabled>
-                                            <span class="text-neutral-400">Round 2: 21/02/2026 (Locked)</span>
-                                        </label>
-                                        <label
-                                            class="flex items-center space-x-3 p-3 rounded-lg border border-neutral-800 bg-neutral-900/50 opacity-60 cursor-not-allowed">
-                                            <input type="radio" name="eventDate" value="2026-02-28"
-                                                class="form-radio text-neutral-600 focus:ring-neutral-600 h-5 w-5"
-                                                disabled>
-                                            <span class="text-neutral-400">Round 3: 28/02/2026 (Locked)</span>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <button type="submit"
-                                    class="w-full btn-primary font-bold py-3.5 px-6 rounded-lg text-lg">
-                                    🚀 Register for Competition
-                                </button>
-                            </div>
-                        </form>
                     </div>
                 </div>
+            </section>
+
+            <!-- SELECTION PROCESS -->
+            <section class="glass-card p-5 sm:p-8 reveal-right">
+                <div class="mb-5">
+                    <p class="sh-over">How to Get In</p>
+                    <h2 class="sh-h">🎯 The Selection Process</h2>
+                    <p class="sh-sub">Click each step to expand.</p>
+                </div>
+                <div id="timeline" class="space-y-0 max-w-xl">
+                    <div class="ts on" data-step="1">
+                        <div class="ts-n">1</div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center gap-1.5 mb-0.5"><span class="text-sm">✍️</span>
+                                <h3 class="font-bold text-white text-xs">Write a Technical Blog</h3>
+                            </div>
+                            <p class="text-neutral-500 text-xs">Write about LLMs and how they work.</p>
+                            <div class="ts-extra">
+                                <p class="text-neutral-600 text-xs leading-relaxed">Post on <strong
+                                        class="text-neutral-400">Medium</strong>. Demonstrates your ability to
+                                    research
+                                    and communicate technical concepts.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ts-line"></div>
+                    <div class="ts" data-step="2">
+                        <div class="ts-n">2</div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center gap-1.5 mb-0.5"><span class="text-sm">⭐</span>
+                                <h3 class="font-bold text-white text-xs">GitHub Engagement</h3>
+                            </div>
+                            <p class="text-neutral-500 text-xs">Create a GitHub account and star the designated
+                                repo.
+                            </p>
+                            <div class="ts-extra">
+                                <p class="text-neutral-600 text-xs leading-relaxed">Only those who star the repo are
+                                    eligible. Provide your <strong class="text-neutral-400">GitHub username</strong>
+                                    in
+                                    your application.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ts-line"></div>
+                    <div class="ts" data-step="3">
+                        <div class="ts-n">3</div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center gap-1.5 mb-0.5"><span class="text-sm">🤝</span>
+                                <h3 class="font-bold text-white text-xs">Join the Ecosystem</h3>
+                            </div>
+                            <p class="text-neutral-500 text-xs">Join official NextGenX AI communities.</p>
+                            <div class="ts-extra">
+                                <p class="text-neutral-600 text-xs leading-relaxed">Join the <strong
+                                        class="text-neutral-400">NextGenX AI Community</strong> and the <strong
+                                        class="text-neutral-400">AI Learner Group</strong> for updates.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ts-line"></div>
+                    <div class="ts" data-step="4">
+                        <div class="ts-n">4</div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center gap-1.5 mb-0.5"><span class="text-sm">📞</span>
+                                <h3 class="font-bold text-white text-xs">The Final Interview</h3>
+                            </div>
+                            <p class="text-neutral-500 text-xs">A short personal call with final qualifying
+                                questions.
+                            </p>
+                            <div class="ts-extra">
+                                <p class="text-neutral-600 text-xs leading-relaxed">A <strong
+                                        class="text-neutral-400">personal short call</strong> to confirm your
+                                    readiness
+                                    for AI Learner 1.0.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- WHAT YOU WILL GAIN -->
+            <section class="glass-card p-5 sm:p-8 reveal-zoom">
+                <div class="mb-5">
+                    <p class="sh-over">Benefits</p>
+                    <h2 class="sh-h">🏆 What You Will Gain</h2>
+                    <p class="sh-sub">Hover each card to reveal details.</p>
+                </div>
+                <div class="img-banner mb-6 feature-item" style="max-height:260px;overflow:hidden;">
+                    <img src="images/galaxy-student.png" alt="Building the future" loading="lazy"
+                        style="object-fit:cover;width:100%;">
+                    <div class="cap-pill">You will build things that did not exist before</div>
+                </div>
+                <div class="fc-grid reveal-stagger">
+                    <div class="fc feature-item">
+                        <div class="fc-inner">
+                            <div class="fc-f">
+                                <div class="em">🧠</div>
+                                <div class="tt">Deep Knowledge</div>
+                            </div>
+                            <div class="fc-b">
+                                <p>From scratch to advanced AI. Taught properly.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fc feature-item">
+                        <div class="fc-inner">
+                            <div class="fc-f">
+                                <div class="em">🐙</div>
+                                <div class="tt">GitHub Mastery</div>
+                            </div>
+                            <div class="fc-b">
+                                <p>Version control, open-source, and agentic frameworks.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fc feature-item">
+                        <div class="fc-inner">
+                            <div class="fc-f">
+                                <div class="em">🌐</div>
+                                <div class="tt">Full-Stack AI</div>
+                            </div>
+                            <div class="fc-b">
+                                <p>Build AI apps and full-stack websites from scratch.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fc feature-item">
+                        <div class="fc-inner">
+                            <div class="fc-f">
+                                <div class="em">🏢</div>
+                                <div class="tt">Google Offices</div>
+                            </div>
+                            <div class="fc-b">
+                                <p>Exclusive AI workshops and real industry exposure.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fc feature-item">
+                        <div class="fc-inner">
+                            <div class="fc-f">
+                                <div class="em">📚</div>
+                                <div class="tt">Free Courses</div>
+                            </div>
+                            <div class="fc-b">
+                                <p>Google AI courses completely free and recognized.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fc feature-item">
+                        <div class="fc-inner">
+                            <div class="fc-f">
+                                <div class="em">🛠️</div>
+                                <div class="tt">Industry Tools</div>
+                            </div>
+                            <div class="fc-b">
+                                <p>Hands-on with industry-level tools. Practical exposure.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fc feature-item">
+                        <div class="fc-inner">
+                            <div class="fc-f">
+                                <div class="em">🤝</div>
+                                <div class="tt">Networking</div>
+                            </div>
+                            <div class="fc-b">
+                                <p>High-value connections with future innovators.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fc feature-item">
+                        <div class="fc-inner">
+                            <div class="fc-f">
+                                <div class="em">🤖</div>
+                                <div class="tt">Agentic AI</div>
+                            </div>
+                            <div class="fc-b">
+                                <p>Cutting-edge AI autonomy and multi-agent systems.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-6 pt-5 border-t border-neutral-800/40">
+                    <p class="text-xs text-neutral-700 font-semibold uppercase tracking-widest mb-2">What You Will
+                        NOT
+                        Get</p>
+                    <div class="grid sm:grid-cols-2 gap-1.5 mb-3">
+                        <div class="wg"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#333"
+                                stroke-width="2.5" stroke-linecap="round">
+                                <line x1="18" y1="6" x2="6" y2="18" />
+                                <line x1="6" y1="6" x2="18" y2="18" />
+                            </svg><span>Certificates</span></div>
+                        <div class="wg"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#333"
+                                stroke-width="2.5" stroke-linecap="round">
+                                <line x1="18" y1="6" x2="6" y2="18" />
+                                <line x1="6" y1="6" x2="18" y2="18" />
+                            </svg><span>Credits</span></div>
+                    </div>
+                    <div class="p-3 bg-neutral-900/50 border border-neutral-800/40 rounded-lg">
+                        <p class="text-neutral-400 text-xs leading-relaxed"><strong class="text-neutral-200">The
+                                Verdict:</strong> Tough. Demanding. But if you stick with us — <strong
+                                class="text-neutral-200">completely worth it.</strong></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SURVIVAL RULES -->
+            <section class="glass-card p-5 sm:p-8 reveal-shock">
+                <div class="mb-5">
+                    <p class="sh-over">Strict Enforcement</p>
+                    <h2 class="sh-h">⚠️ Survival Rules</h2>
+                    <p class="sh-sub">Failing any rule = <strong class="text-red-400">immediate removal.</strong>
+                    </p>
+                </div>
+                <div class="duo flip mb-6">
+                    <div class="img-frame feature-item"><img src="images/i-am.png" alt="I AM WHO I AM" loading="lazy">
+                    </div>
+                    <div class="space-y-3">
+                        <p class="text-neutral-300 text-sm leading-relaxed">AI Learner 1.0 is not a course you
+                            attend.
+                            It is a <strong class="text-white">standard you maintain.</strong></p>
+                        <p class="text-neutral-500 text-sm leading-relaxed">Discipline is not optional. It is the
+                            entry
+                            fee for staying.</p>
+                        <p class="text-red-400 text-xs font-bold">Three rules. Non-negotiable.</p>
+                    </div>
+                </div>
+                <div class="space-y-2 reveal-stagger">
+                    <div class="sv-card feature-item">
+                        <div class="flex items-start gap-2.5"><span class="text-lg mt-0.5">🚀</span>
+                            <div>
+                                <h3 class="font-bold text-white text-xs mb-0.5">The Kick-Off Meet</h3>
+                                <p class="text-neutral-500 text-xs leading-relaxed">Miss the initial Google Meet
+                                    after
+                                    selection = kicked. No second chances.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sv-card feature-item">
+                        <div class="flex items-start gap-2.5"><span class="text-lg mt-0.5">🐙</span>
+                            <div>
+                                <h3 class="font-bold text-white text-xs mb-0.5">GitHub Activity</h3>
+                                <p class="text-neutral-500 text-xs leading-relaxed">Fail to update GitHub more than
+                                    <strong class="text-red-300">5 times</strong> = removed from batch.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sv-card feature-item">
+                        <div class="flex items-start gap-2.5"><span class="text-lg mt-0.5">📅</span>
+                            <div>
+                                <h3 class="font-bold text-white text-xs mb-0.5">Attendance</h3>
+                                <p class="text-neutral-500 text-xs leading-relaxed">Inactive for more than <strong
+                                        class="text-red-300">5 days</strong> = removed. Engagement is
+                                    non-negotiable.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- REGISTRATION FORM -->
+            <div id="register-form" class="glass-card p-5 sm:p-8 reveal-zoom">
+                <div id="form-container">
+                    <div class="mb-5">
+                        <p class="sh-over">Application</p>
+                        <h2 class="sh-h">Apply for AI Learner 1.0</h2>
+                        <p class="text-neutral-500 text-xs">Fill your details. Only the top 50 will be selected. 🚀
+                        </p>
+                    </div>
+                    <div class="prog-track mb-1">
+                        <div class="prog-fill" id="form-progress" style="width:33%"></div>
+                    </div>
+                    <p class="text-xs text-neutral-700 text-right mb-5" id="step-indicator">Step 1 of 3</p>
+                    <form id="signup-form" novalidate>
+                        <div class="step-panel active" id="step-1">
+                            <p class="text-neutral-500 text-xs mb-3">Let us start with your name.</p>
+                            <div class="form-input-container mb-2"><input type="text" id="fullName" name="fullName"
+                                    required class="form-input" placeholder=" " autocomplete="name"><label
+                                    for="fullName" class="form-label">Full Name</label></div>
+                            <p class="form-note">Enter your name as it appears on your student ID.</p>
+                            <div class="mt-5 flex justify-end"><button type="button" id="next-1" class="btn-primary"
+                                    style="width:auto;padding:.65rem 1.8rem;font-size:.82rem;">Continue →</button>
+                            </div>
+                        </div>
+                        <div class="step-panel" id="step-2">
+                            <p class="text-neutral-500 text-xs mb-3">Your IILM college email address.</p>
+                            <div class="form-input-container mb-2"><input type="email" id="email" name="email" required
+                                    class="form-input" placeholder=" " pattern="[a-zA-Z0-9._%+\-]+@iilm\.edu$"
+                                    autocomplete="email"><label for="email" class="form-label">College Email
+                                    Address</label></div>
+                            <p class="form-note">Must end with @iilm.edu</p>
+                            <div class="mt-5 flex gap-2"><button type="button" id="back-2" class="btn-primary"
+                                    style="width:auto;padding:.65rem 1.2rem;font-size:.82rem;background:transparent;color:#fff;">←
+                                    Back</button><button type="button" id="next-2" class="btn-primary"
+                                    style="flex:1;font-size:.82rem;">Continue →</button></div>
+                        </div>
+                        <div class="step-panel" id="step-3">
+                            <p class="text-neutral-500 text-xs mb-3">Almost there! Your WhatsApp number.</p>
+                            <div class="form-input-container mb-2">
+                                <div class="phone-wrap"><span class="phone-pre">+91</span><input type="tel"
+                                        id="phoneNumber" name="phoneNumber" required class="form-input" placeholder=" "
+                                        maxlength="10" pattern="[0-9]{10}" autocomplete="tel"><label for="phoneNumber"
+                                        class="form-label" style="left:4.5rem;">WhatsApp
+                                        Number</label></div>
+                            </div>
+                            <p class="form-note">We will contact you on WhatsApp for batch updates.</p>
+                            <div class="mt-4 p-3 bg-neutral-900/50 border border-neutral-800/40 rounded-lg"><label
+                                    class="flex items-start gap-2.5 cursor-pointer"><input type="checkbox"
+                                        id="accept-challenge" class="accept-box mt-0.5"><span
+                                        class="text-xs text-neutral-500 leading-relaxed">I have read the <strong
+                                            class="text-neutral-300">Survival Rules</strong> and accept the
+                                        challenge.</span></label></div>
+                            <div class="mt-4 flex gap-2"><button type="button" id="back-3" class="btn-primary"
+                                    style="width:auto;padding:.65rem 1.2rem;font-size:.82rem;background:transparent;color:#fff;">←
+                                    Back</button><button type="submit" id="submit-btn" class="btn-primary" disabled
+                                    style="flex:1;font-size:.82rem;opacity:.4;cursor:not-allowed;">🚀 Submit
+                                    Application</button></div>
+                        </div>
+                        <div id="form-error-msg"
+                            class="hidden mt-3 p-2.5 bg-red-900/30 text-red-300 border border-red-800/50 rounded-lg text-xs">
+                        </div>
+                    </form>
+                </div>
             </div>
+
         </main>
 
-        <!-- Footer -->
-        <footer class="text-center mt-20 text-neutral-500 text-sm">
-            <div class="reveal mb-6">
-                <p class="text-neutral-400 text-sm tracking-widest uppercase">Powered by NextGenX Ai</p>
+        <footer class="text-center mt-14 pb-5">
+            <div class="reveal mb-3">
+                <p class="text-neutral-700 text-xs tracking-widest uppercase">Powered by NextGenX AI</p>
             </div>
-            <p>&copy; 2026 NextGenX AI Club, School of Engineering, IILM University. All rights reserved.</p>
+            <p class="text-neutral-800 text-xs">2026 NextGenX AI Learner Community. All rights reserved.</p>
         </footer>
-
     </div>
-
-    <!-- JavaScript Files -->
     <script src="js/background.js"></script>
-    <script src="js/config.js"></script>
-    <script src="js/main.js"></script>
+    <script src="js/main.js?v=2"></script>
 </body>
 
 </html>
